@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Каталог товарів</title>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+    ">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,6 +20,6 @@
     <div id="categories-list"></div>
     <div id="category-content"></div>
 
-    <script src="/lab3/dist/script.js"></script>
+    <script src="../dist/script.js"></script>
 </body>
 </html>

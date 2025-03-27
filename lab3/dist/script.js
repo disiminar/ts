@@ -23,24 +23,23 @@ class CatalogApp {
     initEventListeners() {
         const homeLink = document.getElementById('home-link');
         const catalogLink = document.getElementById('catalog-link');
-        if (homeLink) {
-            homeLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.loadCategories();
-            });
+        this.addLinkListener(homeLink);
+        this.addLinkListener(catalogLink);
+    }
+    addLinkListener(link) {
+        if (link) {
+            link.addEventListener('click', this.handleLinkClick.bind(this));
         }
-        if (catalogLink) {
-            catalogLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.loadCategories();
-            });
-        }
+    }
+    handleLinkClick(e) {
+        e.preventDefault();
+        this.loadCategories();
     }
     loadCategories() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 console.log('Завантаження категорій');
-                const response = yield fetch('data/categories.json');
+                const response = yield fetch('../src/data/categories.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -57,15 +56,23 @@ class CatalogApp {
         this.categoriesContainer.innerHTML = '';
         this.contentContainer.innerHTML = '';
         categories.forEach(category => {
-            const categoryLink = document.createElement('a');
-            categoryLink.href = '#';
-            categoryLink.textContent = category.name;
-            categoryLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.loadCategoryContent(category.shortname);
-            });
+            const categoryLink = this.createCategoryLink(category);
             this.categoriesContainer.appendChild(categoryLink);
         });
+        const specialsLink = this.createSpecialsLink(categories);
+        this.categoriesContainer.appendChild(specialsLink);
+    }
+    createCategoryLink(category) {
+        const categoryLink = document.createElement('a');
+        categoryLink.href = '#';
+        categoryLink.textContent = category.name;
+        categoryLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.loadCategoryContent(category.shortname);
+        });
+        return categoryLink;
+    }
+    createSpecialsLink(categories) {
         const specialsLink = document.createElement('a');
         specialsLink.href = '#';
         specialsLink.textContent = 'Спеціальні пропозиції';
@@ -73,7 +80,7 @@ class CatalogApp {
             e.preventDefault();
             this.loadRandomCategory(categories);
         });
-        this.categoriesContainer.appendChild(specialsLink);
+        return specialsLink;
     }
     loadRandomCategory(categories) {
         const randomIndex = Math.floor(Math.random() * categories.length);
@@ -84,7 +91,7 @@ class CatalogApp {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 console.log(`Завантаження вмісту категорії: ${categoryShortname}`);
-                const response = yield fetch(`data/${categoryShortname}.json`);
+                const response = yield fetch(`../src/data/${categoryShortname}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -98,24 +105,42 @@ class CatalogApp {
         });
     }
     renderCategoryContent(categoryData) {
-        this.contentContainer.innerHTML = `<h2>${categoryData.name}</h2>`;
+        // Create elements instead of using innerHTML to avoid potential CSP issues
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = categoryData.name;
+        this.contentContainer.innerHTML = ''; // Clear previous content
+        this.contentContainer.appendChild(titleElement);
         const productGrid = document.createElement('div');
         productGrid.classList.add('product-grid');
         categoryData.items.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product-item');
-            productElement.innerHTML = `
-                <img src="${product.image}" alt="${product.name}" />
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <p>Ціна: ${product.price} грн</p>
-            `;
+            const productElement = this.createProductElement(product);
             productGrid.appendChild(productElement);
         });
         this.contentContainer.appendChild(productGrid);
     }
+    createProductElement(product) {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product-item');
+        const imgElement = document.createElement('img');
+        imgElement.src = product.image;
+        imgElement.alt = product.name;
+        const nameElement = document.createElement('h3');
+        nameElement.textContent = product.name;
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = product.description;
+        const priceElement = document.createElement('p');
+        priceElement.textContent = `Ціна: ${product.price} грн`;
+        productElement.appendChild(imgElement);
+        productElement.appendChild(nameElement);
+        productElement.appendChild(descriptionElement);
+        productElement.appendChild(priceElement);
+        return productElement;
+    }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM повністю завантажений');
-    new CatalogApp();
-});
+// Use an IIFE to avoid global scope pollution
+(function () {
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM повністю завантажений');
+        new CatalogApp();
+    });
+})();
