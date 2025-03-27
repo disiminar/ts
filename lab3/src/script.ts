@@ -128,10 +128,9 @@ class CatalogApp {
     }
 
     private renderCategoryContent(categoryData: { name: string, items: Product[] }): void {
-        // Create elements instead of using innerHTML to avoid potential CSP issues
         const titleElement = document.createElement('h2');
         titleElement.textContent = categoryData.name;
-        this.contentContainer.innerHTML = ''; // Clear previous content
+        this.contentContainer.innerHTML = ''; 
         this.contentContainer.appendChild(titleElement);
         
         const productGrid = document.createElement('div');
@@ -150,7 +149,9 @@ class CatalogApp {
         productElement.classList.add('product-item');
 
         const imgElement = document.createElement('img');
-        imgElement.src = product.image;
+        
+        const placeholderImage = this.createPlaceholderImage(200, 200, product.name);
+        imgElement.src = placeholderImage;
         imgElement.alt = product.name;
 
         const nameElement = document.createElement('h3');
@@ -169,9 +170,30 @@ class CatalogApp {
 
         return productElement;
     }
+
+    private createPlaceholderImage(width: number, height: number, text: string): string {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        
+        if (!ctx) {
+            return ''; 
+        }
+
+        ctx.fillStyle = '#cccccc';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = '#000000';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, width / 2, height / 2);
+
+        return canvas.toDataURL('image/png');
+    }
 }
 
-// Use an IIFE to avoid global scope pollution
 (function() {
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOM повністю завантажений');
