@@ -19,25 +19,53 @@ class CatalogApp {
     private contentContainer: HTMLElement;
 
     constructor() {
-        this.categoriesContainer = document.getElementById('categories-list')!;
-        this.contentContainer = document.getElementById('category-content')!;
+        const categoriesContainer = document.getElementById('categories-list');
+        const contentContainer = document.getElementById('category-content');
+
+        if (!categoriesContainer || !contentContainer) {
+            throw new Error('Не знайдено необхідні контейнери DOM');
+        }
+
+        this.categoriesContainer = categoriesContainer;
+        this.contentContainer = contentContainer;
 
         this.initEventListeners();
         this.loadCategories();
     }
 
     private initEventListeners(): void {
-        document.getElementById('home-link')!.addEventListener('click', () => this.loadCategories());
-        document.getElementById('catalog-link')!.addEventListener('click', () => this.loadCategories());
+        const homeLink = document.getElementById('home-link');
+        const catalogLink = document.getElementById('catalog-link');
+
+        if (homeLink) {
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.loadCategories();
+            });
+        }
+
+        if (catalogLink) {
+            catalogLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.loadCategories();
+            });
+        }
     }
 
     private async loadCategories(): Promise<void> {
         try {
+            console.log('Завантаження категорій');
             const response = await fetch('data/categories.json');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const data = await response.json();
+            console.log('Отримані категорії:', data);
             this.renderCategories(data.categories);
         } catch (error) {
-            console.error('Error loading categories:', error);
+            console.error('Помилка завантаження категорій:', error);
         }
     }
 
@@ -49,15 +77,20 @@ class CatalogApp {
             const categoryLink = document.createElement('a');
             categoryLink.href = '#';
             categoryLink.textContent = category.name;
-            categoryLink.addEventListener('click', () => this.loadCategoryContent(category.shortname));
+            categoryLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.loadCategoryContent(category.shortname);
+            });
             this.categoriesContainer.appendChild(categoryLink);
         });
 
-        // Add Specials link
         const specialsLink = document.createElement('a');
         specialsLink.href = '#';
-        specialsLink.textContent = 'Specials';
-        specialsLink.addEventListener('click', () => this.loadRandomCategory(categories));
+        specialsLink.textContent = 'Спеціальні пропозиції';
+        specialsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.loadRandomCategory(categories);
+        });
         this.categoriesContainer.appendChild(specialsLink);
     }
 
@@ -69,11 +102,18 @@ class CatalogApp {
 
     private async loadCategoryContent(categoryShortname: string): Promise<void> {
         try {
+            console.log(`Завантаження вмісту категорії: ${categoryShortname}`);
             const response = await fetch(`data/${categoryShortname}.json`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const data = await response.json();
+            console.log('Отримані дані категорії:', data);
             this.renderCategoryContent(data);
         } catch (error) {
-            console.error('Error loading category content:', error);
+            console.error('Помилка завантаження вмісту категорії:', error);
         }
     }
 
@@ -90,7 +130,7 @@ class CatalogApp {
                 <img src="${product.image}" alt="${product.name}" />
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
-                <p>Ціна: ${product.price}</p>
+                <p>Ціна: ${product.price} грн</p>
             `;
             productGrid.appendChild(productElement);
         });
@@ -99,4 +139,7 @@ class CatalogApp {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => new CatalogApp());
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM повністю завантажений');
+    new CatalogApp();
+});
