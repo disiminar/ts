@@ -7,7 +7,7 @@
             "shortname": "eneida",
             "description": "Потужна поема Котляревського",
             "price": 250,
-            "image": "https://place-hold.it/200x200?text=Книга1"
+            "image": "https://place-hold.it/200x200?text=eneida"
         },
         {
             "id": 2,
@@ -15,7 +15,7 @@
             "shortname": "1984",
             "description": "Антиутопія Джорджа Орвелла про тоталітарне суспільство",
             "price": 200,
-            "image": "https://place-hold.it/200x200?text=Книга2"
+            "image": "https://place-hold.it/200x200?text=1984"
         },
         {
             "id": 3,
@@ -23,7 +23,7 @@
             "shortname": "harry-potter",
             "description": "Перша книга про пригоди юного чарівника",
             "price": 180,
-            "image": "https://place-hold.it/200x200?text=Книга3"
+            "image": "https://place-hold.it/200x200?text=harry-potter"
         },
         {
             "id": 4,
@@ -31,7 +31,7 @@
             "shortname": "little-prince",
             "description": "Філософська казка Антуана де Сент-Екзюпері",
             "price": 120,
-            "image": "https://place-hold.it/200x200?text=Книга4"
+            "image": "https://place-hold.it/200x200?text=little-prince"
         },
         {
             "id": 5,
@@ -39,7 +39,7 @@
             "shortname": "three-musketeers",
             "description": "Пригодницький роман Олександра Дюма",
             "price": 220,
-            "image": "https://place-hold.it/200x200?text=Книга5"
+            "image": "https://place-hold.it/200x200?text=three-musketeers"
         }
         
     ]
