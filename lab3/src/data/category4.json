@@ -1,0 +1,45 @@
+{
+    "name": "Спортивні товари",
+    "items": [
+        {
+            "id": 1,
+            "name": "Футбольний м'яч",
+            "shortname": "football",
+            "description": "Професійний футбольний м'яч",
+            "price": 800,
+            "image": "https://place-hold.it/200x200/gdf/dfg/dfgd&text=dfg"
+        },
+        {
+            "id": 2,
+            "name": "Тренувальний коврик",
+            "shortname": "yoga-mat",
+            "description": "Коврик для йоги та фітнесу",
+            "price": 500,
+            "image": "https://place-hold.it/200x200/asd/asd/asd&text=asd"
+        },
+        {
+            "id": 3,
+            "name": "Гантелі",
+            "shortname": "dumbbells",
+            "description": "Пара гантелей вагою 5 кг",
+            "price": 1200,
+            "image": "https://place-hold.it/200x200/bgs/bgs/bgs&text=bgsssssssssss"
+        },
+        {
+            "id": 4,
+            "name": "Бігові кросівки",
+            "shortname": "running-shoes",
+            "description": "Легкі кросівки для бігу",
+            "price": 2500,
+            "image": "https://place-hold.it/200x200/aaa/bbb/ccc&text=12345"
+        },
+        {
+            "id": 5,
+            "name": "Велосипедний шолом",
+            "shortname": "bike-helmet",
+            "description": "Захисний шолом для велосипедистів",
+            "price": 1500,
+            "image": "https://place-hold.it/200x200/ccc/xxx/fff&text=FFFFFFFFFFFFFFF"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "Книги",
+    "items": [
+        {
+            "id": 1,
+            "name": "Енеїда",
+            "shortname": "eneida",
+            "description": "Потужна поема Котляревського",
+            "price": 250,
+            "image": "https://place-hold.it/200x200?text=Книга1"
+        },
+        {
+            "id": 2,
+            "name": "1984",
+            "shortname": "1984",
+            "description": "Антиутопія Джорджа Орвелла про тоталітарне суспільство",
+            "price": 200,
+            "image": "https://place-hold.it/200x200?text=Книга2"
+        },
+        {
+            "id": 3,
+            "name": "Гаррі Поттер",
+            "shortname": "harry-potter",
+            "description": "Перша книга про пригоди юного чарівника",
+            "price": 180,
+            "image": "https://place-hold.it/200x200?text=Книга3"
+        },
+        {
+            "id": 4,
+            "name": "Маленький принц",
+            "shortname": "little-prince",
+            "description": "Філософська казка Антуана де Сент-Екзюпері",
+            "price": 120,
+            "image": "https://place-hold.it/200x200?text=Книга4"
+        },
+        {
+            "id": 5,
+            "name": "Три мушкетери",
+            "shortname": "three-musketeers",
+            "description": "Пригодницький роман Олександра Дюма",
+            "price": 220,
+            "image": "https://place-hold.it/200x200?text=Книга5"
+        }
+        
+    ]
+}

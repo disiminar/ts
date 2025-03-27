@@ -1,0 +1,45 @@
+{
+    "name": "Електроніка",
+    "items": [
+        {
+            "id": 1,
+            "name": "Смартфон XYZ Pro",
+            "shortname": "smartphone-xyz",
+            "description": "Потужний смартфон з 6.5-дюймовим екраном",
+            "price": 12000,
+            "image": "https://place-hold.it/200x200?text=Смартфон1"
+        },
+        {
+            "id": 2,
+            "name": "Навушники Bluetooth",
+            "shortname": "bluetooth-headphones",
+            "description": "Бездротові навушники з шумозаглушенням",
+            "price": 3500,
+            "image": "https://place-hold.it/200x200?text=Навушники"
+        },
+        {
+            "id": 3,
+            "name": "Розумний годинник",
+            "shortname": "smart-watch",
+            "description": "Фітнес-трекер з моніторингом здоров'я",
+            "price": 4500,
+            "image": "https://place-hold.it/200x200?text=Годинник"
+        },
+        {
+            "id": 4,
+            "name": "Планшет TabMax",
+            "shortname": "tablet-max",
+            "description": "Потужний планшет з 10-дюймовим екраном",
+            "price": 8000,
+            "image": "https://place-hold.it/200x200?text=Планшет"
+        },
+        {
+            "id": 5,
+            "name": "Бездротова зарядка",
+            "shortname": "wireless-charger",
+            "description": "Швидка бездротова зарядка для смартфонів",
+            "price": 1200,
+            "image": "https://place-hold.it/200x200?text=Зарядка"
+        }
+    ]
+}
